@@ -1,6 +1,7 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AcademicLeaderGUI extends JFrame {
@@ -235,9 +236,30 @@ public class AcademicLeaderGUI extends JFrame {
             
             if (selectedModule != null) {
                 String moduleID = selectedModule.split(" - ")[0];
-                String lecturerID = JOptionPane.showInputDialog(this, "Enter Lecturer ID:");
                 
-                if (lecturerID != null && !lecturerID.trim().isEmpty()) {
+                // Get all lecturers from users.txt
+                List<String> lecturers = new ArrayList<>();
+                for (String line : Helpers.readFromFile("users.txt")) {
+                    String[] parts = line.split("\\|");
+                    if (parts.length >= 4 && parts[1].equals("Lecturer")) {
+                        lecturers.add(parts[0] + " - " + parts[3]); // LEC01 - Lecturer Name
+                    }
+                }
+                
+                if (lecturers.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "No lecturers found in the system!");
+                    return;
+                }
+                
+                // Show dropdown for lecturer selection
+                String selectedLecturer = (String) JOptionPane.showInputDialog(this,
+                    "Select Lecturer:", "Assign Lecturer to Module",
+                    JOptionPane.QUESTION_MESSAGE, null, 
+                    lecturers.toArray(new String[0]), lecturers.get(0));
+                
+                if (selectedLecturer != null) {
+                    String lecturerID = selectedLecturer.split(" - ")[0];
+                    
                     if (logic.assignLecturer(lecturerID, moduleID)) {
                         JOptionPane.showMessageDialog(this, "Lecturer assigned!");
                         showAssignLecturer(); // Refresh

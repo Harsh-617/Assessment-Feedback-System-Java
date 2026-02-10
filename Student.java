@@ -24,29 +24,8 @@ public class Student {
     public String getId() { return id; }
     public String getName() { return name; }
 
-    // ==========================================
-    // 1. REGISTER STUDENT (Self-Registration)
-    // ==========================================
-    public static boolean registerStudent(String pass, String name, String gender, String email, String phone, String age) {
-        // Validation (Page 8 Requirement)
-        if (!Helpers.validateEmail(email)) {
-            return false; // Invalid email
-        }
 
-        // Generate ID (Page 7 Requirement: "STU", "users.txt")
-        String newID = Helpers.generateUniqueID("STU", "users.txt");
-
-        // Format: userID|role|password|name|gender|email|phone|age
-        String record = newID + "|Student|" + pass + "|" + name + "|" + gender + "|" + email + "|" + phone + "|" + age;
-        
-        // Save
-        Helpers.writeToFile("users.txt", record);
-        return true;
-    }
-
-    // ==========================================
-    // 2. REGISTER FOR CLASSES
-    // ==========================================
+    // REGISTER FOR CLASSES
     public boolean registerForClasses(String classID) {
         // Prevent duplicate enrollment
         List<String> enrollments = Helpers.readFromFile("enrollments.txt");
@@ -64,18 +43,14 @@ public class Student {
         return true;
     }
 
-    // ==========================================
-    // 3. SUBMIT COMMENTS
-    // ==========================================
+    // SUBMIT COMMENTS
     public void submitComments(String lecturerID, String comment) {
         // Format: studentID|lecturerID|comment (Page 12)
         String record = this.id + "|" + lecturerID + "|" + comment;
         Helpers.writeToFile("comments.txt", record);
     }
 
-    // ==========================================
-    // 4. UPDATE PROFILE
-    // ==========================================
+    // UPDATE PROFILE
     public void updateProfile(String newPass, String newName, String newGender, String newEmail, String newPhone, String newAge) {
         List<String> users = Helpers.readFromFile("users.txt");
         List<String> updatedUsers = new ArrayList<>();
@@ -99,9 +74,7 @@ public class Student {
             }
         }
 
-        // Re-write the file (This implies Member 1 needs a "writeAllToFile" or we overwrite users.txt manually)
-        // For this assignment using append-only helpers, we technically usually append, 
-        // but for updates, we must overwrite.
+
         try (java.io.BufferedWriter bw = new java.io.BufferedWriter(new java.io.FileWriter("users.txt"))) {
             for (String line : updatedUsers) {
                 bw.write(line);
@@ -110,9 +83,7 @@ public class Student {
         } catch (java.io.IOException e) { e.printStackTrace(); }
     }
 
-    // ==========================================
-    // 5. VIEW RESULTS 
-    // ==========================================
+    // VIEW RESULTS 
     public List<String[]> viewResults() {
         List<String[]> myResults = new ArrayList<>();
         

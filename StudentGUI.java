@@ -45,56 +45,8 @@ public class StudentGUI extends JFrame {
         setVisible(true);
     }
 
-    // ==========================================
-    // GUI: REGISTRATION FORM (Public Static)
-    // Called from Main Login screen
-    // ==========================================
-    public static void showRegistrationForm() {
-        JFrame frame = new JFrame("Student Registration");
-        frame.setSize(400, 500);
-        frame.setLayout(new GridLayout(8, 2));
 
-        JTextField txtName = new JTextField();
-        JPasswordField txtPass = new JPasswordField();
-        String[] genders = {"Male", "Female"};
-        JComboBox<String> cmbGender = new JComboBox<>(genders);
-        JTextField txtEmail = new JTextField();
-        JTextField txtPhone = new JTextField();
-        JTextField txtAge = new JTextField();
-        JButton btnSubmit = new JButton("Register");
-
-        frame.add(new JLabel("Name:")); frame.add(txtName);
-        frame.add(new JLabel("Password:")); frame.add(txtPass);
-        frame.add(new JLabel("Gender:")); frame.add(cmbGender);
-        frame.add(new JLabel("Email:")); frame.add(txtEmail);
-        frame.add(new JLabel("Phone:")); frame.add(txtPhone);
-        frame.add(new JLabel("Age:")); frame.add(txtAge);
-        frame.add(new JLabel("")); frame.add(btnSubmit);
-
-        btnSubmit.addActionListener(e -> {
-            boolean success = Student.registerStudent(
-                new String(txtPass.getPassword()),
-                txtName.getText(),
-                (String) cmbGender.getSelectedItem(),
-                txtEmail.getText(),
-                txtPhone.getText(),
-                txtAge.getText()
-            );
-
-            if (success) {
-                JOptionPane.showMessageDialog(frame, "Registration Successful! ID Generated.");
-                frame.dispose();
-            } else {
-                JOptionPane.showMessageDialog(frame, "Error: Invalid Email (Must have '@' and '.')");
-            }
-        });
-
-        frame.setVisible(true);
-    }
-
-    // ==========================================
     // GUI: UPDATE PROFILE
-    // ==========================================
     private void showUpdateProfileDialog() {
         // Simple inputs for update
         JTextField txtName = new JTextField(currentStudent.getName());
@@ -120,9 +72,7 @@ public class StudentGUI extends JFrame {
         }
     }
 
-    // ==========================================
     // GUI: REGISTER FOR CLASS
-    // ==========================================
     private void showRegisterClassDialog() {
         // In a real app, you would load Class IDs from classes.txt into a ComboBox
         // Here we use a text field for simplicity per assignment requirements
@@ -137,9 +87,7 @@ public class StudentGUI extends JFrame {
         }
     }
 
-    // ==========================================
     // GUI: SUBMIT COMMENTS
-    // ==========================================
     private void showCommentDialog() {
         JTextField txtLecID = new JTextField();
         JTextArea txtComment = new JTextArea(5, 20);
@@ -156,9 +104,7 @@ public class StudentGUI extends JFrame {
         }
     }
 
-    // ==========================================
     // GUI: VIEW RESULTS (JTable)
-    // ==========================================
     private void showResultsWindow() {
         JFrame resFrame = new JFrame("My Results");
         resFrame.setSize(500, 300);
