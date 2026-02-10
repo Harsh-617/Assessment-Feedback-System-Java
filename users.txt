@@ -1,8 +1,0 @@
-ADM01|Admin|admin123|System Admin|Male|admin@apu.my|000|99
-STU01|Student|ben123|Benjamin|Male|ben@mail.com|1234|22
-STU02|Student|don1234|Donald|Male|don@mail.com|9876|23
-LEC01|Lecturer|matt1234|matt|Female|matt@mail.com|6789|50
-AL01|Academic Leader|harsh1234|Harsh|Male|harsh@mail.com|91234|19
-LEC02|Lecturer|zack1234|zack|Male|zack@mail.com|5678|34
-LEC03|Lecturer|saad1234|saad|Male|saad@mail.com|2345|23
-LEC04|Lecturer|yash1234|yash|Male|yash@mail.com|8765|34
